@@ -94,8 +94,6 @@ def build_payroll(timesheet: pd.DataFrame, employees: pd.DataFrame) -> pd.DataFr
     return add_pay_type(add_gross_pay(merged))
 
 
-
-
 def payroll_export(payroll: pd.DataFrame) -> pd.DataFrame:
     """The file the online payroll provider imports — a NEW frame, not a renamed one.
 
@@ -120,4 +118,3 @@ def payroll_export(payroll: pd.DataFrame) -> pd.DataFrame:
         "rate": paid["hourly_rate_usd"],
         "total": paid["gross_pay"],
     })
-

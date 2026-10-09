@@ -39,7 +39,6 @@ Test it: pytest tests/test_pipeline.py -k app
 # What the page does NOT do: arithmetic on rows, cleaning, merging. If you find
 # yourself writing a loop or an apply here, that logic belongs in the package.
 
-import pandas as pd
 import streamlit as st
 
 from payroll import build_payroll, load_employees, load_timesheet, payroll_export

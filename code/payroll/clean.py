@@ -21,6 +21,7 @@ give you less.
 import pandas as pd
 import re
 
+
 def parse_hours(value) -> float:
     """Read a weekly-hours string the way a shift lead typed it; return a float.
 
@@ -63,7 +64,6 @@ def parse_hours(value) -> float:
         return float(s)
     except ValueError:
         return float("nan")
-
 
 
 def clean_currency(value) -> float:
@@ -131,4 +131,3 @@ if __name__ == "__main__":
     for sample in ("38h 30m", "42h", "45m", "24.5", "", "forty"):
         print(repr(sample), "->", parse_hours(sample))
     print(clean_currency("$1,020.00"))
-
