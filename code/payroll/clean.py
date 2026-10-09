@@ -90,10 +90,12 @@ def clean_currency(value) -> float:
     - You wrote this function in Assignment 02. It is the same function. That
       is not an accident — cleaning currency is something every pipeline does.
     """
-    if pd.isna(value):
-        return float("nan")
-    s = str(value).replace("$", "").replace(",", "").strip()
-    return pd.to_numeric(s, errors="coerce")
+    if value is None or pd.isna(value):
+        return 0.0
+    text = str(value).replace("$", "").replace(",", "").strip()
+    number = pd.to_numeric(text, errors="coerce")
+    return 0.0 if pd.isna(number) else float(number)
+
 
 
 def add_hours_worked(timesheet: pd.DataFrame) -> pd.DataFrame:
