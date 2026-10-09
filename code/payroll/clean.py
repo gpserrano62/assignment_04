@@ -122,7 +122,7 @@ def add_hourly_rate(employees: pd.DataFrame) -> pd.DataFrame:
     function and the other column names.
     """
     out = employees.copy()
-    out["rate"] = out["hourly_rate"].apply(clean_currency)
+    out["hourly_rate_usd"] = out["hourly_rate"].apply(clean_currency)
     return out
 
 
