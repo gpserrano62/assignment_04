@@ -19,7 +19,6 @@ give you less.
 """
 
 import pandas as pd
-import re
 
 
 def parse_hours(value) -> float:
@@ -49,21 +48,26 @@ def parse_hours(value) -> float:
     - The mistake people make: forgetting the `/ 60`. `"45m"` is three quarters
       of an hour, not 45 hours, and `test_parse_hours` will tell you.
     """
-    if pd.isna(value):
-        return float("nan")
-    s = str(value).strip().lower()
-    if "h" in s or "m" in s:
-        h = re.search(r"(\d+(?:\.\d+)?)\s*h", s)
-        m = re.search(r"(\d+(?:\.\d+)?)\s*m", s)
-        if not (h or m):
-            return float("nan")
-        hours = float(h.group(1)) if h else 0.0
-        minutes = float(m.group(1)) if m else 0.0
-        return hours + minutes / 60
+    if value is None or pd.isna(value):
+        return 0.0
+    text = str(value).strip().lower()
     try:
-        return float(s)
+        if "h" in text or "m" in text:
+            hours, minutes = 0.0, 0.0
+            rest = text
+            if "h" in rest:
+                hours_part, rest = rest.split("h", 1)
+                hours = float(hours_part)
+            rest = rest.strip()
+            if rest:
+                if not rest.endswith("m"):
+                    return 0.0
+                minutes = float(rest[:-1])
+            return hours + minutes / 60
+        number = float(text)
     except ValueError:
-        return float("nan")
+        return 0.0
+    return 0.0 if pd.isna(number) else number
 
 
 def clean_currency(value) -> float:
