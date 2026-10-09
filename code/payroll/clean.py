@@ -97,7 +97,6 @@ def clean_currency(value) -> float:
     return 0.0 if pd.isna(number) else float(number)
 
 
-
 def add_hours_worked(timesheet: pd.DataFrame) -> pd.DataFrame:
     """Return a copy of the timesheet with one new column, `hours_worked` (float).
 
